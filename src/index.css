@@ -21,7 +21,7 @@ body {
 .main-window {
   position: relative;
   overflow: hidden;
-  /* width: 550px;*/
+  max-width: 650px;
   height: 550px; 
   background-color: #F5F7FB;
   border-radius: 20px;
@@ -42,15 +42,15 @@ body {
 
 .upper-circle {
   position: absolute;
-  top: -10%;
-  right: -10%;
+  top: -8%;
+  right: -8%;
   background-color: #FFFAD1;
 }
 
 .lower-circle {
   position: absolute;
-  bottom: -10%;
-  left: -12%;
+  bottom: -8%;
+  left: -8%;
   background-color: #DEEBF8;
 }
 
@@ -87,7 +87,7 @@ body {
 .question-window {
   position: relative;
   overflow: hidden;
-
+  max-width: 650px;
   padding: 25px;
   background-color: #ffffff;
   border-radius: 20px;
@@ -105,9 +105,16 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 80px; 
-  margin: 20px 15px;
+  margin: 10px 15px;
   z-index: 2;
 }
+
+.question-heading{
+  align-self: center;
+  z-index: 2;
+  margin: 10px 0;
+}
+
 
 .question-tab {
   overflow: hidden;
@@ -141,22 +148,6 @@ body {
   text-align: center;
 }
 
-.option-1 {
-  grid-area: o;
-}
-
-.option-2 {
-  grid-area: t;
-}
-
-.option-3 {
-  grid-area: th;
-}
-
-.option-4 {
-  grid-area: f;
-}
-
 .line{
   width: 90%;
   border: 0.5px solid rgb(199, 192, 192);
@@ -164,10 +155,10 @@ body {
 }
 
 .check-ans-btn {
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 600;
-  width: 125px;
-  height: 32px;
+  width: 150px;
+  height: 52px;
   border-radius: 5px;
   border: none;
   background-color: #4D5B9E;
@@ -177,6 +168,7 @@ body {
   margin-top: 10px;
   align-self: center;
   z-index: 3;
+  padding: 4px;
 }
 
 .check-ans-btn:active{

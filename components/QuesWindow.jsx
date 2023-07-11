@@ -19,6 +19,8 @@ export default function QuesWindow(props) {
             <div className='question-window'>
                 <div className="circle upper-circle" ></div>
                 <div className="circle lower-circle" ></div>
+                <h2 className='question-heading'>Select the right option</h2>
+                <div className='line'></div>
                 {question}
                 <button className='check-ans-btn'>Check Answers</button>
             </div>
