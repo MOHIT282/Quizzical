@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid'
 export default function QuesWindow() {
 
     const [questionsArray, setQuestionsArray] = React.useState([])
-    const [count, setCount] = React.useState(0)
+    const [playAgain, setPlayAgain] = React.useState(true)
     const [checked, setChecked] = React.useState(false)
     const [correct, setCorrect] = React.useState(0)
 
@@ -30,7 +30,7 @@ export default function QuesWindow() {
                 })
                 setQuestionsArray(question_array)
             })
-    }, [count])
+    }, [playAgain])
 
     function handleClickAnswer(id, answer) {
         setQuestionsArray(questions => questions.map(question => {
@@ -49,17 +49,26 @@ export default function QuesWindow() {
         if (selected === false) {
             return
         }
-        setQuestionsArray(questions => questions.map(question => {
-            return { ...question, checked: true }
-        }))
-        setChecked(true)
-        let correct = 0
-        questionsArray.forEach(question => {
-            if (question.correct === question.selected) {
-                correct += 1
-            }
-        })
-        setCorrect(correct)
+        else {
+
+            setQuestionsArray(questions => questions.map(question => {
+                return { ...question, checked: true }
+            }))
+            setChecked(true)
+            let correct = 0
+            questionsArray.forEach(question => {
+                if (question.correct === question.selected) {
+                    correct += 1
+                }
+            })
+            setCorrect(correct)
+        }
+    }
+
+    function playGameAgain(){
+        setPlayAgain(x => !x)
+        setChecked(false)
+        setQuestionsArray([])
     }
 
     const question = questionsArray.map(eachQuestion => {
@@ -71,9 +80,13 @@ export default function QuesWindow() {
         />
     })
 
+    const showErrorMsg = (
+        <h3>Some error occured, Kindly refresh the app</h3>
+    )
+
     return (
         <>
-            {questionsArray.length ? (
+            {(questionsArray.length ) ? (
                 <div className='question-window'>
                     <div className="circle upper-circle" ></div>
                     <div className="circle lower-circle" ></div>
@@ -81,10 +94,10 @@ export default function QuesWindow() {
                     <div className='line'></div>
                     {question}
                     {checked && <h3 className='score'>You have scored {correct}/5 answers</h3>}
-                    <button onClick={handleCheck} className='check-ans-btn'>Check Answers</button>
+                    <button onClick={ checked ? playGameAgain : handleCheck} className='check-ans-btn'>{checked ? 'Play Again' : 'Check Answers'}</button>
                 </div>
             ) : (
-                <h1>Loading Questions...</h1>
+                <h1>Please Wait...</h1>
             )}
         </>
     )

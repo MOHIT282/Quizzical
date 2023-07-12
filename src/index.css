@@ -168,7 +168,11 @@ body {
   border: 1px solid rgba(41, 50, 100, .4);
 }
 
-
+.score{
+  align-self: center;
+  margin: 10px;
+  z-index: 2;
+}
 
 .line {
   width: 90%;
