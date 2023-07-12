@@ -13,7 +13,7 @@ export default function QuesWindow() {
     const shuffleArray = (arr) => arr.sort(() => Math.random() - 0.5);
 
     React.useEffect(function () {
-        fetch('https://opentdb.com/api.php?amount=5&category=18&difficulty=medium')
+        fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=medium')
             .then(value => value.json())
             .then(data => {
                 let question_array = []
