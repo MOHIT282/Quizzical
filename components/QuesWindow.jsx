@@ -9,11 +9,11 @@ export default function QuesWindow() {
     const [playAgain, setPlayAgain] = React.useState(true)
     const [checked, setChecked] = React.useState(false)
     const [correct, setCorrect] = React.useState(0)
-
+    const [noOfQuestons, setNoOfQuestions] = React.useState(6)
     const shuffleArray = (arr) => arr.sort(() => Math.random() - 0.5);
 
     React.useEffect(function () {
-        fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=medium')
+        fetch(`https://opentdb.com/api.php?amount=${noOfQuestons}&category=18&difficulty=medium`)
             .then(value => value.json())
             .then(data => {
                 let question_array = []
@@ -93,7 +93,7 @@ export default function QuesWindow() {
                     <h2 className='question-heading'>Select the right option</h2>
                     <div className='line'></div>
                     {question}
-                    {checked && <h3 className='score'>You have scored {correct}/5 answers</h3>}
+                    {checked && <h3 className='score'>You have scored {correct}/{noOfQuestons} answers</h3>}
                     <button onClick={ checked ? playGameAgain : handleCheck} className='check-ans-btn'>{checked ? 'Play Again' : 'Check Answers'}</button>
                 </div>
             ) : (
