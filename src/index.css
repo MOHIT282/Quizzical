@@ -22,7 +22,7 @@ body {
   position: relative;
   overflow: hidden;
   max-width: 650px;
-  height: 550px; 
+  height: 550px;
   background-color: #F5F7FB;
   border-radius: 20px;
   display: flex;
@@ -104,12 +104,12 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 80px; 
+  min-height: 80px;
   margin: 10px 15px;
   z-index: 2;
 }
 
-.question-heading{
+.question-heading {
   align-self: center;
   z-index: 2;
   margin: 10px 0;
@@ -125,12 +125,12 @@ body {
   font-weight: 500;
 }
 
-.options-tab{
+.options-tab {
   display: flex;
   flex-wrap: wrap;
 }
 
-.option{
+.option {
   min-width: 50px;
   background-color: transparent;
   z-index: 2;
@@ -148,7 +148,29 @@ body {
   text-align: center;
 }
 
-.line{
+.selected{
+  background-color: #D6DBF5;
+}
+
+
+#correct.option {
+  background-color: #94D7A2;
+  border: 1px solid #94D7A2;
+}
+
+#incorrect.option.selected {
+  background-color: #F8BCBC;
+  border: 1px solid #F8BCBC;
+}
+
+#not-selected.option {
+  color: rgba(41, 50, 100, .4);
+  border: 1px solid rgba(41, 50, 100, .4);
+}
+
+
+
+.line {
   width: 90%;
   border: 0.5px solid rgb(199, 192, 192);
   z-index: 3;
@@ -171,17 +193,19 @@ body {
   padding: 4px;
 }
 
-.check-ans-btn:active{
+.check-ans-btn:active {
   box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }
 
-@media only screen and (max-width: 500px){
-  .question-window{
+
+
+@media only screen and (max-width: 500px) {
+  .question-window {
     max-width: 400px;
     padding: 10px;
   }
 
-  .optoins{
+  .optoins {
     display: flex;
     flex-wrap: wrap;
   }

@@ -3,27 +3,89 @@ import Questions from './Questions'
 import { nanoid } from 'nanoid'
 
 
-export default function QuesWindow(props) {
+export default function QuesWindow() {
 
-    const question = props.questionsArray.map(eachQuestion => {
+    const [questionsArray, setQuestionsArray] = React.useState([])
+    const [count, setCount] = React.useState(0)
+    const [checked, setChecked] = React.useState(false)
+    const [correct, setCorrect] = React.useState(0)
+
+    const shuffleArray = (arr) => arr.sort(() => Math.random() - 0.5);
+
+    React.useEffect(function () {
+        fetch('https://opentdb.com/api.php?amount=5&category=18&difficulty=medium')
+            .then(value => value.json())
+            .then(data => {
+                let question_array = []
+
+                data.results.forEach(question => {
+                    question_array.push({
+                        id: nanoid(),
+                        answers: shuffleArray([...question.incorrect_answers, question.correct_answer]),
+                        question: question.question,
+                        correct: question.correct_answer,
+                        selected: null,
+                        checked: false
+                    })
+                })
+                setQuestionsArray(question_array)
+            })
+    }, [count])
+
+    function handleClickAnswer(id, answer) {
+        setQuestionsArray(questions => questions.map(question => {
+            return question.id === id ? { ...question, selected: answer } : question
+        }))
+    }
+
+    function handleCheck() {
+        let selected = true
+        questionsArray.forEach(question => {
+            if (question.selected === null) {
+                selected = false
+                return
+            }
+        })
+        if (selected === false) {
+            return
+        }
+        setQuestionsArray(questions => questions.map(question => {
+            return { ...question, checked: true }
+        }))
+        setChecked(true)
+        let correct = 0
+        questionsArray.forEach(question => {
+            if (question.correct === question.selected) {
+                correct += 1
+            }
+        })
+        setCorrect(correct)
+    }
+
+    const question = questionsArray.map(eachQuestion => {
         return < Questions
             key={eachQuestion.id}
-            question={eachQuestion.question}
-            correct_answer={eachQuestion.correct}
-            answers={eachQuestion.answers}
+            id={eachQuestion.id}
+            question={eachQuestion}
+            handleClickAnswer={handleClickAnswer}
         />
     })
 
     return (
         <>
-            <div className='question-window'>
-                <div className="circle upper-circle" ></div>
-                <div className="circle lower-circle" ></div>
-                <h2 className='question-heading'>Select the right option</h2>
-                <div className='line'></div>
-                {question}
-                <button className='check-ans-btn'>Check Answers</button>
-            </div>
+            {questionsArray.length ? (
+                <div className='question-window'>
+                    <div className="circle upper-circle" ></div>
+                    <div className="circle lower-circle" ></div>
+                    <h2 className='question-heading'>Select the right option</h2>
+                    <div className='line'></div>
+                    {question}
+                    {checked && <h3 className='score'>You have scored {correct}/5 answers</h3>}
+                    <button onClick={handleCheck} className='check-ans-btn'>Check Answers</button>
+                </div>
+            ) : (
+                <h1>Loading Questions...</h1>
+            )}
         </>
     )
 }
