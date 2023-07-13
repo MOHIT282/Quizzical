@@ -42,12 +42,14 @@ export default function QuesWindow() {
         let selected = true
         questionsArray.forEach(question => {
             if (question.selected === null) {
-                selected = false
+                selected = false 
                 return
             }
         })
+        
         if (selected === false) {
-            return
+            alert('Please attempt all the questions first')
+            return null
         }
         else {
 
