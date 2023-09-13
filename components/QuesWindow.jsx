@@ -81,6 +81,16 @@ export default function QuesWindow() {
         />
     })
 
+    const playConfetti = ()=>{
+
+        if (correct === noOfQuestons){
+            return <Confetti/>
+        }
+        else{
+            return null;
+        }
+    }
+
     const showErrorMsg = (
         <h3>Some error occured, Kindly refresh the app</h3>
     )
@@ -95,7 +105,6 @@ export default function QuesWindow() {
                     <div className='line'></div>
                     {question}
                     {checked && <h3 className='score'>You have scored {correct}/{noOfQuestons} answers</h3>}
-                    {checked && <Confetti />}
                     <button onClick={ checked ? playGameAgain : handleCheck} className='check-ans-btn'>{checked ? 'Play Again' : 'Check Answers'}</button>
                 </div>
             ) : ( 
