@@ -1,7 +1,7 @@
 import React from 'react'
 import Questions from './Questions'
 import { nanoid } from 'nanoid'
-
+import Confetti from 'react-confetti'
 
 export default function QuesWindow() {
 
@@ -15,7 +15,7 @@ export default function QuesWindow() {
     React.useEffect(function () {
         fetch(`https://opentdb.com/api.php?amount=${noOfQuestons}&category=18&difficulty=medium`)
             .then(value => value.json())
-            .then(data => {
+            .then(data => { 
                 let question_array = []
 
                 data.results.forEach(question => {
@@ -51,8 +51,7 @@ export default function QuesWindow() {
             alert('Please attempt all the questions first')
             return null
         }
-        else {
-
+        else{
             setQuestionsArray(questions => questions.map(question => {
                 return { ...question, checked: true }
             }))
@@ -96,9 +95,10 @@ export default function QuesWindow() {
                     <div className='line'></div>
                     {question}
                     {checked && <h3 className='score'>You have scored {correct}/{noOfQuestons} answers</h3>}
+                    {checked && <Confetti />}
                     <button onClick={ checked ? playGameAgain : handleCheck} className='check-ans-btn'>{checked ? 'Play Again' : 'Check Answers'}</button>
                 </div>
-            ) : (
+            ) : ( 
                 <h1>Please Wait...</h1>
             )}
         </>

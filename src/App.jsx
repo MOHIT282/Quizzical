@@ -1,7 +1,6 @@
 import React from 'react'
 import Start from '../components/Start'
 import QuesWindow from '../components/QuesWindow'
-import { nanoid } from 'nanoid'
 
 function App() {
   

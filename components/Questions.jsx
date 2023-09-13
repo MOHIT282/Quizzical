@@ -13,8 +13,7 @@ export default function Questions(props) {
         }
         props.handleClickAnswer(props.id, answer)
     }
-
-
+    
     const options = answers.map(option => {
         let id = null
         if (props.question.checked) {
